@@ -23,12 +23,12 @@ Aplikasi ini dikembangkan sebagai bagian dari proyek pengembangan aplikasi mobil
 
 | Halaman | Screenshot |
 |----------|-------------|
-| **Splash Screen** | ![Splash](screenshots/splash.png) |
-| **Biodata Page** | ![Biodata](screenshots/biodata.png) |
-| **Kalkulator Page** | ![Kalkulator](screenshots/kalkulator.png) |
-| **Cuaca Page** | ![Cuaca](screenshots/cuaca.png) |
-| **Kontak Page** | ![Kontak](screenshots/kontak.png) |
-| **Berita Page** | ![Berita](screenshots/berita.png) |
+| **Splash Screen** | <img src="screenshots/splash.png" height="400"/> |
+| **Biodata Page** | <img src="screenshots/biodata.png" height="400"/> |
+| **Kalkulator Page** | <img src="screenshots/kalkulator.png" height="400"/> |
+| **Cuaca Page** | <img src="screenshots/cuaca.png" height="400"/> |
+| **Kontak Page** | <img src="screenshots/kontak.png" height="400"/> |
+| **Berita Page** | <img src="screenshots/berita.png" height="400"/> |
 
 > 💡 *Semua screenshot dapat ditemukan di folder `screenshots/` pada repository ini.*
 
