@@ -10,12 +10,13 @@ Aplikasi ini dikembangkan sebagai bagian dari proyek pengembangan aplikasi mobil
 
 | Fitur | Deskripsi |
 |-------|------------|
-| 🌤️ **Splash Screen** | Tampilan pembuka aplikasi dengan logo dan gradasi ungu lembut. |
-| 👤 **Biodata Page** | Halaman untuk menampilkan biodata pengguna (nama, email, deskripsi singkat). |
-| 🧮 **Kalkulator Page** | Kalkulator sederhana untuk perhitungan dasar dengan desain modern. |
-| 🌦️ **Cuaca Page** | Menampilkan informasi cuaca terkini, suhu, kelembapan, angin, dan ramalan harian. |
-| 📞 **Kontak Page** | Daftar kontak dengan fitur pencarian dan tombol menu pada tiap kontak. |
-| 📰 **Berita Page** | Daftar berita terkini dengan gambar dan ringkasan singkat setiap artikel. |
+| 🕒 **Splash Screen** | Tampilan pembuka selama 5 detik berisi **judul aplikasi**, **foto pengguna**, **NIM**, dan **nama lengkap** dengan gradasi ungu lembut. |
+| 🏠 **Dashboard (Navigation)** | Halaman utama setelah Splash Screen dengan **Bottom Navigation Bar** yang berisi menu: *Biodata, Kontak, Kalkulator, Cuaca, dan Berita*. Tiap menu tampil menggunakan konsep **Fragment/Composable Screen**. |
+| 👤 **Biodata Page** | Menampilkan informasi pribadi seperti **nama, email, deskripsi singkat**, serta input interaktif berupa **dropdown**, **radio button**, **text field**, dan **calendar**. Disertai foto profil dan desain menarik. |
+| 📞 **Kontak Page** | Menampilkan **daftar 15 kontak statis** dengan **foto berbentuk lingkaran** dan **nama kontak**. Tersedia tampilan modern dan rapi seperti layout daftar kontak pada umumnya. |
+| 🧮 **Kalkulator Page** | Kalkulator sederhana yang mendukung operasi **tambah, kurang, kali, bagi, kuadrat, akar kuadrat**, serta tombol **hapus (C)**. Desainnya minimalis dan mudah digunakan. |
+| 🌦️ **Cuaca Page** | Halaman statis yang menampilkan **informasi suhu, kelembapan, dan kondisi cuaca** disertai **gambar animasi cuaca menarik**. |
+| 📰 **Berita Page** | Daftar berita statis dengan **gambar thumbnail**, **judul**, dan **ringkasan singkat**. Tampilan dibuat dalam bentuk **list card** berulang seperti layout berita profesional. |
 
 ---
 
@@ -57,9 +58,12 @@ Aplikasi menggunakan **Bottom Navigation Bar** untuk berpindah antar halaman uta
 ---
 
 ## 🧑‍💻 Pengembang
-**Nama:** Dindin Imanudin  
-**NIM:** 152023073 
+**Nama:** Dindin Imanudin
+
+**NIM:** 152023073
+
 **Prodi:** Informatika 
+
 **Kampus:** Institut Teknologi Nasional Bandung
 
 
