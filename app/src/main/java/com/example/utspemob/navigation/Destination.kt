@@ -1,9 +1,12 @@
 package com.example.utspemob.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Cloud
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -15,10 +18,10 @@ enum class Destination(
     val contentDescription: String
 ) {
     Biodata("biodata", Icons.Default.Person, "Biodata", "Biodata"),
-    Kalkulator("kalkulator", Icons.Default.PlayArrow, "Kalkulator", "Kalkulator"),
-    Cuaca("cuaca", Icons.Default.LocationOn, "Cuaca", "Cuaca"),
+    Kalkulator("kalkulator", Icons.Filled.Calculate, "Kalkulator", "Kalkulator"),
+    Cuaca("cuaca", Icons.Filled.Cloud, "Cuaca", "Cuaca"),
     Kontak("kontak", Icons.Default.Call, "Kontak", "Kontak"),
-    Berita("berita", Icons.Default.MailOutline, "Berita", "Berita");
+    Berita("berita", Icons.Filled.Newspaper, "Berita", "Berita");
 
     companion object {
         val entries = listOf(Biodata, Kalkulator, Cuaca, Kontak, Berita)

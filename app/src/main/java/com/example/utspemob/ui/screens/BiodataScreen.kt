@@ -35,11 +35,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.utspemob.R
+import com.example.utspemob.ui.components.BlurredGradientBackground
 import com.example.utspemob.ui.components.DatePickerFieldToModal
 import com.example.utspemob.ui.components.DropdownMenuField
+import com.example.utspemob.ui.components.Profile
 import com.example.utspemob.ui.components.RadioGroupField
 import java.sql.Date
 import java.text.SimpleDateFormat
@@ -48,100 +51,92 @@ import java.util.Locale
 @Preview(showBackground = true)
 @Composable
 fun BiodataScreen() {
-    var isEditing by remember { mutableStateOf(false) }
-
-    var nama by remember { mutableStateOf("Dindin Imanudin") }
-    var alamat by remember { mutableStateOf("Bandung, Jalan Terusan Cikutra Baru") }
-    var gender by remember { mutableStateOf("Laki-laki") }
-    var pendidikan by remember { mutableStateOf("S1") }
+    val initialNama = "Dindin Imanudin"
+    val initialAlamat = "Bandung, Jalan Terusan Cikutra Baru"
+    val initialGender = "Laki-laki"
+    val initialPendidikan = "S1"
 
     val localeID = Locale.forLanguageTag("id-ID")
     val defaultBirthDate = remember {
         SimpleDateFormat("dd MMMM yyyy", localeID).parse("14 Juli 2005")?.time
     }
+
+    var nama by remember { mutableStateOf(initialNama) }
+    var alamat by remember { mutableStateOf(initialAlamat) }
+    var gender by remember { mutableStateOf(initialGender) }
+    var pendidikan by remember { mutableStateOf(initialPendidikan) }
     var birthDate by remember { mutableStateOf<Long?>(defaultBirthDate) }
 
-    Column(
+    val hasChanges = nama != initialNama ||
+            alamat != initialAlamat ||
+            gender != initialGender ||
+            pendidikan != initialPendidikan ||
+            birthDate != defaultBirthDate
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(30.dp)
-            .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // 🔹 Bar atas manual dengan judul dan tombol kanan atas
-        Row(
+        BlurredGradientBackground(
+            modifier = Modifier.align(Alignment.TopCenter)
+        )
+        Column(
             modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxSize()
+                .padding(30.dp)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Biodata", style = MaterialTheme.typography.headlineSmall)
-            Row {
-                if (isEditing) {
-                    IconButton(onClick = {
-                        isEditing = false
-                        Log.d("Biodata", "Data disimpan!")
-                    }) {
-                        Icon(Icons.Default.Check, contentDescription = "Simpan")
-                    }
-                    IconButton(onClick = {
-                        isEditing = false
-                    }) {
-                        Icon(Icons.Default.Close, contentDescription = "Batal")
-                    }
-                } else {
-                    IconButton(onClick = { isEditing = true }) {
-                        Icon(Icons.Default.Edit, contentDescription = "Edit")
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Biodata",
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        fontWeight = FontWeight.Medium
+                    )
+                )
+
+                if (hasChanges) {
+                    Row {
+                        IconButton(onClick = {
+                            Log.d("Biodata", "Data disimpan!")
+                        }) {
+                            Icon(Icons.Default.Check, contentDescription = "Simpan")
+                        }
+                        IconButton(onClick = {
+                            nama = initialNama
+                            alamat = initialAlamat
+                            gender = initialGender
+                            pendidikan = initialPendidikan
+                            birthDate = defaultBirthDate
+                        }) {
+                            Icon(Icons.Default.Close, contentDescription = "Batal")
+                        }
                     }
                 }
             }
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Profile()
+            Spacer(modifier = Modifier.height(24.dp))
 
-        // Foto profil
-        Box(
-            modifier = Modifier.size(180.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(160.dp)
-                    .clip(CircleShape)
-                    .background(
-                        Brush.linearGradient(
-                            colors = listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.tertiary
-                            )
-                        )
-                    )
-            )
-            Image(
-                painter = painterResource(R.drawable.dindin),
-                contentDescription = "Dindin",
-                modifier = Modifier
-                    .size(140.dp)
-                    .clip(CircleShape)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        if (isEditing) {
-            // 🟢 Mode Edit
             OutlinedTextField(
                 value = nama,
                 onValueChange = { nama = it },
                 label = { Text("Nama") },
                 modifier = Modifier.fillMaxWidth()
             )
+
             OutlinedTextField(
                 value = alamat,
                 onValueChange = { alamat = it },
                 label = { Text("Alamat") },
                 modifier = Modifier.fillMaxWidth()
             )
+
             DatePickerFieldToModal(
                 label = "Tanggal Lahir",
                 value = birthDate,
@@ -149,6 +144,7 @@ fun BiodataScreen() {
                 defaultValue = null,
                 modifier = Modifier.padding(top = 16.dp)
             )
+
             RadioGroupField(
                 options = listOf("Laki-laki", "Perempuan"),
                 selectedOption = gender,
@@ -156,29 +152,16 @@ fun BiodataScreen() {
                 label = "Jenis Kelamin",
                 modifier = Modifier.padding(vertical = 16.dp)
             )
+
             DropdownMenuField(
                 label = "Pendidikan",
                 options = listOf("SD", "SMP", "SMA", "D3", "S1", "S2", "S3"),
                 defaultValue = pendidikan,
                 onSelected = { pendidikan = it }
             )
-        } else {
-            // 🔵 Mode View
-            Text("Nama: $nama", style = MaterialTheme.typography.bodyLarge)
-            Text("Alamat: $alamat", style = MaterialTheme.typography.bodyLarge)
-            Text(
-                "Tanggal Lahir: ${birthDate?.let { convertMillisToDate(it) } ?: "-"}",
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Text("Jenis Kelamin: $gender", style = MaterialTheme.typography.bodyLarge)
-            Text("Pendidikan: $pendidikan", style = MaterialTheme.typography.bodyLarge)
         }
     }
+
 }
 
-fun convertMillisToDate(millis: Long): String {
-    val localeID = Locale.forLanguageTag("id-ID")
-    val formatter = SimpleDateFormat("dd MMMM yyyy", localeID)
-    return formatter.format(Date(millis))
-}
 
